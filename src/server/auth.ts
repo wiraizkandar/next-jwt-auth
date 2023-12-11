@@ -21,7 +21,7 @@ export const authOptions: NextAuthOptions = {
 		},
 	},
 	pages: {
-		signIn: "/login", //(4) custom sign in page path
+		signIn: "/login", //(4) custom sign in route
 	},
 	providers: [
 		Credentials({
