@@ -1,6 +1,22 @@
 export const userService = {
 	authenticate,
+	getAuthenticatedUser,
 };
+
+async function getAuthenticatedUser(token: string) {
+	const accessToken = token;
+
+	const userData = await fetch("https://hostedapi.test/api/v1/auth/me", {
+		method: "GET",
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+		},
+	});
+
+	const userInfo = await userData.json();
+
+	return userInfo;
+}
 
 async function authenticate(username: string, password: string) {
 	try {
@@ -11,7 +27,7 @@ async function authenticate(username: string, password: string) {
 		formData.append("username", "ultron");
 		formData.append("password", "password");
 
-		process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+		// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 		const authenticateRequest = await fetch(
 			"https://hostedapi.test/api/v1/auth/authenticate",
@@ -24,8 +40,11 @@ async function authenticate(username: string, password: string) {
 			}
 		);
 
-		const user = await authenticateRequest.json();
+		const token = await authenticateRequest.json();
 
+		const user = getAuthenticatedUser(token.access_token);
+
+		// get user by on token
 		return user;
 	} catch (error) {
 		console.log(error);
