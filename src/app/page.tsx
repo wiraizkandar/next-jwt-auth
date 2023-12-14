@@ -33,67 +33,99 @@ export default function LoginPage({ searchParams }: PageProps) {
 	};
 	return (
 		<>
-			<div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-				<div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-					<form className="space-y-6" onSubmit={handleSubmit}>
-						<div>
-							<label
-								htmlFor="username"
-								className="block text-sm font-medium leading-6 text-gray-900"
-							>
-								Username
-							</label>
-							<div className="mt-2">
-								<input
-									id="username"
-									name="username"
-									type="text"
-									autoComplete="off"
-									required
-									value={inputs.username || ""}
-									onChange={handleChange}
-									className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-								/>
-							</div>
-						</div>
+			<div className="min-h-full h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 items-center">
+				<div className="sm:mx-auto sm:w-full sm:max-w-md">
+					<img
+						className="mx-auto h-24 w-auto"
+						src="/images/gundam.png"
+						alt="Workflow"
+					/>
+					<h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+						Sign in to your account
+					</h2>
+				</div>
 
-						<div>
-							<div className="flex items-center justify-between">
+				<div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+					<div className="bg-white py-8 px-4 sm:rounded-lg sm:px-10 shadow-md">
+						<form className="space-y-6" onSubmit={handleSubmit}>
+							<div>
+								<label
+									htmlFor="email"
+									className="block text-sm font-medium text-gray-700"
+								>
+									Email address
+								</label>
+								<div className="mt-1">
+									<input
+										id="username"
+										name="username"
+										type="username"
+										autoComplete="email"
+										value={inputs.username || ""}
+										onChange={handleChange}
+										required
+										className="text-gray-400 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+									/>
+								</div>
+							</div>
+
+							<div>
 								<label
 									htmlFor="password"
-									className="block text-sm font-medium leading-6 text-gray-900"
+									className="block text-sm font-medium text-gray-700"
 								>
 									Password
 								</label>
+								<div className="mt-1">
+									<input
+										id="password"
+										name="password"
+										type="password"
+										autoComplete="current-password"
+										required
+										value={inputs.password || ""}
+										onChange={handleChange}
+										className="text-gray-400 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+									/>
+								</div>
 							</div>
-							<div className="mt-2">
-								<input
-									id="password"
-									name="password"
-									type="password"
-									autoComplete="off"
-									required
-									value={inputs.password || ""}
-									onChange={handleChange}
-									className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-								/>
-							</div>
-						</div>
 
-						<div>
-							<button
-								type="submit"
-								className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-							>
-								Sign in
-							</button>
-						</div>
-						{searchParams.error && (
-							<p className="text-red-600 text-center capitalize">
-								Login failed.
-							</p>
-						)}
-					</form>
+							<div className="flex items-center justify-between">
+								<div className="flex items-center">
+									<input
+										id="remember-me"
+										name="remember-me"
+										type="checkbox"
+										className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+									/>
+									<label
+										htmlFor="remember-me"
+										className="ml-2 block text-sm text-gray-900"
+									>
+										Remember me
+									</label>
+								</div>
+
+								<div className="text-sm">
+									<a
+										href="#"
+										className="font-medium text-indigo-600 hover:text-indigo-500"
+									>
+										Forgot your password?
+									</a>
+								</div>
+							</div>
+
+							<div>
+								<button
+									type="submit"
+									className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+								>
+									Sign in
+								</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</>
