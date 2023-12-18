@@ -1,15 +1,7 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { ChangeEvent, FormEvent, useState } from "react";
-
-type LoginInput = {
-	username: string;
-	password: string;
-};
-
-type PageProps = {
-	searchParams: { error?: string };
-};
+import { PageProps, LoginInput } from "./page";
 
 export default function LoginPage({ searchParams }: PageProps) {
 	const [inputs, setInputs] = useState<LoginInput>({
@@ -25,7 +17,6 @@ export default function LoginPage({ searchParams }: PageProps) {
 
 	const handleSubmit = async (event: FormEvent) => {
 		event.preventDefault();
-
 		await signIn("credentials", {
 			username: inputs.username,
 			password: inputs.password,

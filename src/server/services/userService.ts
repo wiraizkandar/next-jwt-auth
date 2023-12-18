@@ -15,38 +15,34 @@ async function getAuthenticatedUser(token: string) {
 
 	const userInfo = await userData.json();
 
+	userInfo.access_token = accessToken;
+
 	return userInfo;
 }
 
 async function authenticate(username: string, password: string) {
-	try {
-		// Create a new URLSearchParams object
-		const formData = new URLSearchParams();
+	// Create a new URLSearchParams object
+	const formData = new URLSearchParams();
 
-		// Add form fields and values to the URLSearchParams object
-		formData.append("username", "ultron");
-		formData.append("password", "password");
+	// Add form fields and values to the URLSearchParams object
+	formData.append("username", "ultron");
+	formData.append("password", "password");
 
-		// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+	const authenticateRequest = await fetch(
+		"https://hostedapi.test/api/v1/auth/authenticate",
+		{
+			method: "POST",
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded",
+			},
+			body: formData.toString(),
+		}
+	);
 
-		const authenticateRequest = await fetch(
-			"https://hostedapi.test/api/v1/auth/authenticate",
-			{
-				method: "POST",
-				headers: {
-					"Content-Type": "application/x-www-form-urlencoded",
-				},
-				body: formData.toString(),
-			}
-		);
+	const token = await authenticateRequest.json();
 
-		const token = await authenticateRequest.json();
+	const user = await getAuthenticatedUser(token.access_token);
 
-		const user = getAuthenticatedUser(token.access_token);
-
-		// get user by on token
-		return user;
-	} catch (error) {
-		console.log(error);
-	}
+	// get user by on token
+	return user;
 }
