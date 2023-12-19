@@ -25,8 +25,8 @@ async function authenticate(username: string, password: string) {
 	const formData = new URLSearchParams();
 
 	// Add form fields and values to the URLSearchParams object
-	formData.append("username", "ultron");
-	formData.append("password", "password");
+	formData.append("username", username);
+	formData.append("password", password);
 
 	const authenticateRequest = await fetch(
 		"https://hostedapi.test/api/v1/auth/authenticate",

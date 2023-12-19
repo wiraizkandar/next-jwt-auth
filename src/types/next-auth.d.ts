@@ -14,16 +14,8 @@ declare module "next-auth" {
 
 declare module "next-auth/jwt" {
 	interface JWT {
-		microsite_user_id: string;
-		user_email: string;
-		account_id: string;
-		user_extension?: string;
 		user_first_name: string;
-		user_last_name: string;
 		user_level: string;
-		user_status: string;
-		user_created_date: string;
-		user_created_by: string;
 		access_token: string;
 	}
 }

@@ -20,18 +20,21 @@ export const authOptions: NextAuthOptions = {
 		},
 		async session({ session, token, user }) {
 			if (token) {
-				session.user.id = token.userId; //(3)
-				session.user.user_first_name = token.user_first_name; //(3)
-				session.user.access_token = token.access_token; //(3)
-				session.user.user_level = token.user_level; //(3)
+				session.user.id = token.userId;
+				session.user.user_first_name = token.user_first_name;
+				session.user.access_token = token.access_token;
+				session.user.user_level = token.user_level;
 			}
 
 			return session;
 		},
+		async error(error, req, res) {
+			console.log(error);
+			// Handle other errors as needed
+		},
 	},
 	pages: {
 		signIn: "/",
-		signOut: "/",
 	},
 	providers: [
 		Credentials({
